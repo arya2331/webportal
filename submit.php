@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $timestamp = isset($_SESSION['form_submitted_ts'])
         ? $_SESSION['form_submitted_ts'] 
         : null;
-    if(is_null($timestamp) || (time() - $timestamp) > 30) {
+    if(is_null($timestamp) || (time() - $timestamp) > 24*60*60) {
       // echo "time";
         if(process_data($_POST)) {
             $_SESSION['submit']=$_POST['submit'];
