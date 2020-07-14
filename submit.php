@@ -7,12 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $timestamp = isset($_SESSION['form_submitted_ts'])
         ? $_SESSION['form_submitted_ts'] 
         : null;
-    if(is_null($timestamp) || (time() - $timestamp) > 5) {
+    if(is_null($timestamp) || (time() - $timestamp) > 30) {
       // echo "time";
         if(process_data($_POST)) {
             $_SESSION['submit']=$_POST['submit'];
             $_SESSION['form_submitted_ts'] = time();
-            echo 'Succesfully submitted';
+            echo ' Form succesfully submitted';
         }
     } else {
         // Form submitted in last 24 hours.  Perhaps send HTTP 403 header.
@@ -34,7 +34,8 @@ $subject= "Corona symptom found in".$datanew['name'] ;
 $message="I have corona";
   if (($datanew['symptom1']=='Yes')||($datanew['symptom2']=='Yes')){
     mail($to,$subject,$message);
-  // echo $_SESSION['userinfo']['username'];
+  // echo $_SESSION['username'];
+    echo "Mail sent Succesfully"."<br>";
   }  
 // Open file in append mode 
   $filename = $_SESSION['username'].".csv";
